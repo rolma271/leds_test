@@ -2,7 +2,7 @@
  * @file leds.c
  * @author Marco Rolon Radcenco
  * @brief LED Port Control Source File
- * 
+ *
  * This file provides functions for controlling LEDs on a specific port. It includes
  * functions to initialize the port, turn LEDs on or off, and check their status.
  */
@@ -44,22 +44,22 @@
  * @brief Pointer to the memory address that controls the LED port.
  *
  * This static pointer stores the address of the memory location
- * used to control the state of the LEDs. It is initialized in 
+ * used to control the state of the LEDs. It is initialized in
  * the LEDs_Create function.
  */
-static uint16_t *_leds_port;
+static uint16_t * _leds_port;
 
 /**
  * @brief Converts an LED index to a bitmask.
  *
  * This static function shifts the least significant bit (LSB) to the position
  * corresponding to the given LED index.
- * 
+ *
  * @param led Index of the LED.
  * @return Bitmask corresponding to the LED.
  */
-static uint16_t indexToMask(int led) { 
-    return LEDS_LSB << (led - LEDS_LED_OFFSET); 
+static uint16_t indexToMask(int led) {
+    return LEDS_LSB << (led - LEDS_LED_OFFSET);
 }
 
 /**
@@ -67,7 +67,7 @@ static uint16_t indexToMask(int led) {
  *
  * This static function ensures that the provided LED number falls within the
  * valid range of LEDS_FIRST_LED to LEDS_LAST_LED.
- * 
+ *
  * @param led Index of the LED to check.
  * @return true if the LED is within range, false otherwise.
  */
@@ -75,15 +75,14 @@ static bool isValidIndex(int led) {
     return ((LEDS_LAST_LED >= led) && (LEDS_FIRST_LED <= led));
 }
 
-bool LEDs_Create(uint16_t *port_address) {
+bool LEDs_Create(uint16_t * port_address) {
     if (NULL == port_address) {
         return false;
-    }
-    else{
+    } else {
         _leds_port = port_address;
         LEDs_SetAllOff();
         return true;
-    } 
+    }
 }
 
 bool LEDs_SetOff(int led) {
